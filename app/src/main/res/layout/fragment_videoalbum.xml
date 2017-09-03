@@ -7,7 +7,7 @@
 
     <com.example.carlosjoseanguiano.multimedia_bsd.GridRecyclerView
 
-    android:id="@+id/grid_recycler"
+        android:id="@+id/grid_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
