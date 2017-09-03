@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -15,11 +16,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 /**
@@ -37,7 +45,7 @@ class MediaAdapterAllAlbum extends RecyclerView.Adapter<MediaAdapterAllAlbum.Med
     private boolean backPressed = false;
     private Activity context;
 
-    MediaAdapterAllAlbum(Activity context,List<DataPicturesAlbum> mediaList, boolean backPressed) {
+    MediaAdapterAllAlbum(Activity context, List<DataPicturesAlbum> mediaList, boolean backPressed) {
         Log.i(TAG, "MediaAdapterAllAlbums: ");
         this.context = context;
         this.itemList = mediaList;
@@ -73,13 +81,17 @@ class MediaAdapterAllAlbum extends RecyclerView.Adapter<MediaAdapterAllAlbum.Med
         ImageView thumbnail;
         TextView textBucket;
         TextView sizeImages;
+        ImageView picture;
 
 
         MediaListHolder(View view) {
             super(view);
-            this.thumbnail = view.findViewById(R.id.grid_album);
-            this.textBucket = view.findViewById(R.id.txtBucket);
-            this.sizeImages = view.findViewById(R.id.sizeImages);
+            ButterKnife.bind(this, itemView);
+
+            this.picture = view.findViewById(R.id.album_preview);
+//            this.thumbnail = view.findViewById(R.id.grid_album);
+//            this.textBucket = view.findViewById(R.id.txtBucket);
+//            this.sizeImages = view.findViewById(R.id.sizeImages);
             view.setOnClickListener(this);
         }
 
@@ -97,9 +109,7 @@ class MediaAdapterAllAlbum extends RecyclerView.Adapter<MediaAdapterAllAlbum.Med
         public void bindTo(MediaListHolder mediaListRowHolder, int i) {
             DataPicturesAlbum message = itemList.get(i);
 
-            mediaListRowHolder.textBucket.setText(itemList.get(i).getFolder());
-//            mediaListRowHolder.sizeImages.setText(itemList.get(i).getPathSize().size() + "");
-
+//            mediaListRowHolder.textBucket.setText(itemList.get(i).getFolder());
 
             try {
 //                Uri uri = Uri.fromFile(new File("file://" + itemList.get(i).getPathSize().get(0)));
@@ -110,39 +120,45 @@ class MediaAdapterAllAlbum extends RecyclerView.Adapter<MediaAdapterAllAlbum.Med
                     mediaListRowHolder.thumbnail.setImageBitmap(bmThumbnail);
                 } else {
 
-                /*    Bitmap bitmapImage = BitmapFactory.decodeFile(uri.getPath());
-                    float screenWidth = getScreenWidth(context);
-                    float newHeight = screenWidth;
-
-                    if (mediaListRowHolder.thumbnail.getWidth() != 0 && mediaListRowHolder.thumbnail.getHeight() != 0) {
-                        newHeight = (screenWidth * mediaListRowHolder.thumbnail.getHeight()) / mediaListRowHolder.thumbnail.getWidth();
-                    }
-                    Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmapImage, (int) screenWidth, (int) newHeight, true);
-                    mediaListRowHolder.thumbnail.setImageBitmap(scaledBitmap);*/
-
-
-                    float screenWidth = getScreenWidth(context);
-                    float newHeight = screenWidth;
-
-                    Picasso.with(context)
+                    /*Picasso.with(context)
                             .load(uri)
-//                            .transform(new BitmapTransform(screenWidth, newHeight,uri))
                             .resize(size, size)
                             .centerCrop()
-//                            .placeholder(R.drawable.logo_slogan)
-                            .into(mediaListRowHolder.thumbnail);
+                            .into(mediaListRowHolder.thumbnail);*/
+
+
+                 /* String a = "file://" + itemList.get(i).getPathSize().get(0);
+                    RequestOptions options = new RequestOptions()
+                            .format(DecodeFormat.PREFER_ARGB_8888)
+                            .centerCrop()
+                            .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
+
+                    Glide.with(context)
+                            .load(a)
+                            .apply(options)
+                            .into(mediaListRowHolder.thumbnail);*/
+
+
+                    String a = "file://" + itemList.get(i).getPathSize().get(0);
+
+                    RequestOptions options = new RequestOptions()
+//                            .signature(f.getSignature())
+                            .format(DecodeFormat.PREFER_ARGB_8888)
+                            .centerCrop()
+                            .error(R.drawable.ic_3d_rotation)
+                            .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
+
+                    Glide.with(context)
+                            .load("file:///storage/emulated/0/Pictures/facebook/FB_IMG_15041262415725784.jpg")
+                            .apply(options)
+                            .into(mediaListRowHolder.picture);
+
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        float getScreenWidth(Activity activity) {
-            Display display = activity.getWindowManager().getDefaultDisplay();
-            DisplayMetrics outMetrics = new DisplayMetrics();
-            display.getMetrics(outMetrics);
-            return (float) outMetrics.widthPixels;
-        }
     }
 }
 
