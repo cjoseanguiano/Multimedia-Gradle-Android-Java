@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Multimedia-BSD</string>
+    <string name="ReadBy">d</string>
+    <string name="ReceivedBy">s</string>
+    <string name="multimedia_description">ads</string>
+    <string name="btn_play_description">ic_3d_rotation</string>
+    <string name="OK">ok</string>
+</resources>

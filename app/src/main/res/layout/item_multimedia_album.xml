@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:background="#FFF">
+
+    <!--android:layout_centerInParent="true"
+    añade en Imageview para montar el texto sobre la imagen-->
+
+    <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/grid_album"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="1dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/ic_3d_rotation"
+        android:contentDescription="@string/multimedia_description"
+        android:src="@drawable/ic_3d_rotation"
+        tools:src="@drawable/ic_3d_rotation" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/grid_album"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtBucket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Album"
+            android:textColor="#083d77"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/sizeImages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#CCC"
+            android:textSize="12sp" />
+    </LinearLayout>
+</RelativeLayout>
