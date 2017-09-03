@@ -189,12 +189,10 @@ public class PhotoAlbumFragment extends Fragment implements MediaAdapterAllAlbum
         @Override
         protected void onPostExecute(Integer result) {
             if (result == 1) {
-
                 adapter = new MediaAdapterAllAlbum(getActivity(), modelimages, backPressed);
                 mRecyclerView.setAdapter(adapter);
                 adapter.subscribe(PhotoAlbumFragment.this);
                 view.findViewById(R.id.xpxrogressBar).setVisibility(View.GONE);
-
 
             } else {
                 Log.e(TAG, "Failed to show list");

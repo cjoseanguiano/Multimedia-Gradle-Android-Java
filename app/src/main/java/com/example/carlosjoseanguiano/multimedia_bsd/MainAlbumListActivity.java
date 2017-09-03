@@ -54,13 +54,6 @@ public class MainAlbumListActivity extends AppCompatActivity implements PhotoAlb
         viewPager.setAdapter(adapter);
     }
 
-    public static void startForResult(Activity activity, String name, String jid, int RESULT_CODE) {
-        Intent intent = new Intent(activity, MainAlbumListActivity.class);
-        intent.putExtra(EXTRA_NAME, name);
-        intent.putExtra(EXTRA_JID, jid);
-        activity.startActivityForResult(intent, RESULT_CODE);
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

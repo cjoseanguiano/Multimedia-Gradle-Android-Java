@@ -56,7 +56,6 @@ class MediaAdapterAllAlbum extends RecyclerView.Adapter<MediaAdapterAllAlbum.Med
     public MediaListHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         View v = inflater.inflate(R.layout.item_multimedia_album, viewGroup, false);
-
         return new MediaListHolder(v);
     }
 
